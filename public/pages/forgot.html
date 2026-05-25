@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Восстановление пароля</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/css/forgot.css" />
+</head>
+<body>
+  <div class="wrap">
+    <main class="app">
+      <h1>Восстановление пароля</h1>
+
+      <form id="forgotForm">
+        <label>
+          Email
+          <input name="email" type="email" required />
+        </label>
+
+        <button type="button" id="sendCode">Отправить код</button>
+
+        <label>
+          Код подтверждения
+          <input name="code" required />
+        </label>
+
+        <label>
+          Новый пароль
+          <input name="newPassword" type="password" minlength="6" required />
+        </label>
+
+        <button type="submit">Изменить пароль</button>
+      </form>
+
+      <div class="page-actions">
+        <a class="btn secondary" href="/pages/login.html">Назад ко входу</a>
+      </div>
+      <p id="msg"></p>
+    </main>
+  </div>
+  <div class="toast toast-error" id="toast"></div>
+
+  <script src="/js/forgot.js"></script>
+</body>
+</html>

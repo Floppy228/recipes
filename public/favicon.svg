@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFB347;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF8C42;stop-opacity:1" />
+    </linearGradient>
+
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-color="#00000030" />
+    </filter>
+
+    <filter id="shadowLight" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#00000025" />
+    </filter>
+  </defs>
+
+  <circle cx="100" cy="100" r="95" fill="url(#bgGrad)" />
+  <circle cx="100" cy="100" r="88" fill="#FFB85C" />
+
+  <circle cx="100" cy="100" r="84" fill="none" stroke="#FFF2DF" stroke-width="2.5" />
+
+  <circle cx="100" cy="20" r="3" fill="#FFF2DF" opacity="0.8" />
+  <circle cx="165" cy="55" r="2.5" fill="#FFF2DF" opacity="0.6" />
+  <circle cx="178" cy="115" r="3" fill="#FFF2DF" opacity="0.7" />
+  <circle cx="145" cy="172" r="2.5" fill="#FFF2DF" opacity="0.6" />
+  <circle cx="55" cy="172" r="3" fill="#FFF2DF" opacity="0.7" />
+  <circle cx="22" cy="115" r="2.5" fill="#FFF2DF" opacity="0.6" />
+  <circle cx="35" cy="55" r="3" fill="#FFF2DF" opacity="0.8" />
+
+  <g filter="url(#shadow)">
+    <rect x="35" y="80" width="60" height="75" rx="4" fill="#8B4513" />
+    <rect x="40" y="84" width="50" height="67" rx="3" fill="#FFF8F0" />
+    <line x1="48" y1="96" x2="82" y2="96" stroke="#D4A574" stroke-width="1.5" stroke-linecap="round" opacity="0.6" />
+    <line x1="48" y1="103" x2="78" y2="103" stroke="#D4A574" stroke-width="1.5" stroke-linecap="round" opacity="0.6" />
+    <line x1="48" y1="110" x2="80" y2="110" stroke="#D4A574" stroke-width="1.5" stroke-linecap="round" opacity="0.6" />
+    <line x1="48" y1="117" x2="75" y2="117" stroke="#D4A574" stroke-width="1.5" stroke-linecap="round" opacity="0.6" />
+    <line x1="48" y1="124" x2="82" y2="124" stroke="#D4A574" stroke-width="1.5" stroke-linecap="round" opacity="0.6" />
+    <line x1="48" y1="131" x2="70" y2="131" stroke="#D4A574" stroke-width="1.5" stroke-linecap="round" opacity="0.6" />
+    <rect x="35" y="80" width="8" height="75" rx="2" fill="#6B3410" />
+    <path d="M70 84 L70 100 L75 97 L80 100 L80 84 Z" fill="#E74C3C" opacity="0.9" />
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="100" y="95" width="70" height="55" rx="6" fill="#D4A574" />
+    <rect x="100" y="95" width="70" height="55" rx="6" fill="none" stroke="#C8925A" stroke-width="1.5" />
+    <rect x="97" y="92" width="76" height="8" rx="3" fill="#E8C47A" />
+    <ellipse cx="135" cy="150" rx="35" ry="5" fill="#C8925A" />
+    <rect x="90" y="112" width="10" height="7" rx="3" fill="#E8C47A" />
+    <rect x="170" y="112" width="10" height="7" rx="3" fill="#E8C47A" />
+    <ellipse cx="135" cy="92" rx="38" ry="10" fill="#E8C47A" />
+    <ellipse cx="135" cy="90" rx="38" ry="10" fill="#F0D48A" />
+    <circle cx="135" cy="85" r="7" fill="#E8C47A" />
+    <circle cx="135" cy="84" r="5" fill="#F0D48A" />
+    <circle cx="135" cy="83" r="3" fill="#FFE0A3" />
+    <path d="M118 82 Q115 74 118 68" fill="none" stroke="#FFF2DF" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+    <path d="M128 80 Q125 71 128 64" fill="none" stroke="#FFF2DF" stroke-width="2" stroke-linecap="round" opacity="0.5" />
+    <path d="M148 82 Q145 74 148 68" fill="none" stroke="#FFF2DF" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+  </g>
+
+  <g transform="translate(100, 175)" opacity="0.8">
+    <path d="M0 0 A3 3 0 0 1 6 0 A3 3 0 0 1 12 0 Q12 4.5 6 9 Q0 4.5 0 0 Z" fill="#FF6B6B" />
+  </g>
+
+  <g filter="url(#shadowLight)" opacity="0.85">
+    <path d="M85 70 Q92 60 98 67 Q100 72 94 76 Q88 78 85 70 Z" fill="#7CB342" />
+    <line x1="92" y1="64" x2="92" y2="73" stroke="#558B2F" stroke-width="0.8" />
+    <path d="M92 65 Q98 56 104 62 Q106 68 100 71 Q95 73 92 65 Z" fill="#8BC34A" />
+    <line x1="98" y1="60" x2="98" y2="68" stroke="#558B2F" stroke-width="0.8" />
+  </g>
+
+  <circle cx="175" cy="80" r="2" fill="#FFF2DF" opacity="0.6" />
+  <circle cx="170" cy="75" r="1.5" fill="#FFF2DF" opacity="0.5" />
+  <circle cx="178" cy="87" r="1.8" fill="#FFF2DF" opacity="0.5" />
+</svg>

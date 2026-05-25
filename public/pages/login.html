@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Вход</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/css/login.css" />
+</head>
+<body>
+  <div class="wrap">
+    <main class="app">
+      <h1>Вход</h1>
+
+      <form id="loginForm">
+        <label>
+          Логин
+          <input name="login" required />
+        </label>
+
+        <label>
+          Пароль
+          <input name="password" type="password" required />
+        </label>
+
+        <button type="submit">Войти</button>
+      </form>
+
+      <div class="page-actions">
+        <a class="btn secondary" href="/pages/forgot.html">Забыли пароль?</a>
+        <a class="btn secondary" href="/pages/register.html">Регистрация</a>
+        <a class="btn secondary" href="/pages/index.html">На главную</a>
+      </div>
+
+      <p id="msg"></p>
+    </main>
+  </div>
+
+  <script src="/js/login.js"></script>
+</body>
+</html>

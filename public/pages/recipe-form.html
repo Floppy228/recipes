@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Редактор рецепта</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/css/recipe-form.css" />
+</head>
+<body>
+  <div class="wrap">
+    <main class="app">
+      <div class="page-actions">
+        <a class="btn secondary" href="/pages/dashboard.html">Назад в кабинет</a>
+      </div>
+      <h1 id="title">Новый рецепт</h1>
+
+      <form id="recipeForm">
+        <label>
+          Название
+          <input name="title" required />
+        </label>
+
+        <label>
+          Описание
+          <textarea name="description" rows="3"></textarea>
+        </label>
+
+        <label>
+          Категория
+          <select name="category" id="category"></select>
+        </label>
+
+        <label>
+          Обложка
+          <input name="coverImage" type="file" accept="image/*" />
+        </label>
+
+        <h3>Ингредиенты</h3>
+        <div id="ingredients"></div>
+        <button type="button" id="addIngredient">+ Ингредиент</button>
+
+        <h3>Шаги</h3>
+        <div id="steps"></div>
+        <button type="button" id="addStep">+ Шаг</button>
+
+        <br />
+        <br />
+        <button type="submit">Сохранить</button>
+      </form>
+
+      <p id="msg"></p>
+    </main>
+  </div>
+
+  <script src="/js/recipe-form.js"></script>
+</body>
+</html>

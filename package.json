@@ -1,0 +1,17 @@
+﻿{
+  "name": "recipes-web-app",
+  "version": "1.0.0",
+  "description": "Recipes app with auth, password reset, and recipe CRUD",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "multer": "^1.4.5-lts.1",
+    "nanoid": "^5.0.7",
+    "nodemailer": "^6.9.13"
+  }
+}

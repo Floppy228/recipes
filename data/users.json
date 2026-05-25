@@ -1,0 +1,16 @@
+[
+  {
+    "id": "5RR2x5oV-2c2",
+    "login": "demo_user",
+    "email": "f53931151@gmail.com",
+    "passwordHash": "$2b$10$W/PC8tCpvl4c0/A5EKI8yOmrQM8KlE7qzjGt5aTBpBkJsqu.gtL.a",
+    "createdAt": "2026-05-23T14:32:38.960Z"
+  },
+  {
+    "id": "GZ8lgoWJiKZV",
+    "login": "demo_user1",
+    "email": "sivakvladimir11@gmail.com",
+    "passwordHash": "$2b$10$iCF64bSEuqfNvEFVhkR5hOO/0wAfS8GnwY89Kqex54el.mNlm.Qfm",
+    "createdAt": "2026-05-25T01:07:44.586Z"
+  }
+]

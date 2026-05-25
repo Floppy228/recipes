@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Рецепты - Каталог</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/css/index.css" />
+</head>
+<body>
+  <div class="screen-wrap">
+    <main class="app">
+      <header class="top">
+        <h1>Вкусные Рецепты</h1>
+        <p>Готовьте с удовольствием</p>
+      </header>
+
+      <section class="auth-actions" id="authActions"></section>
+
+      <section class="auth-actions">
+        <a class="btn secondary" href="/pages/index.html?liked=1">Избранные рецепты</a>
+      </section>
+
+      <section class="filters">
+        <input id="searchInput" type="search" placeholder="Поиск по названию, ингредиентам или автору" />
+        <select id="categorySelect"></select>
+        <select id="sortSelect">
+          <option value="recent">Сначала новые</option>
+          <option value="likes">Популярные по лайкам</option>
+        </select>
+      </section>
+
+      <section id="recipesList" class="recipes"></section>
+    </main>
+  </div>
+
+  <div class="toast toast-error" id="toast"></div>
+
+  <script src="/js/index.js"></script>
+</body>
+</html>
