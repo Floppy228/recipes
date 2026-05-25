@@ -297,6 +297,37 @@ app.post('/api/auth/logout', (req, res) => {
   });
 });
 
+app.delete('/api/auth/account', authRequired, (req, res) => {
+  const userId = req.session.userId;
+  const users = safeReadArray(USERS_PATH);
+  const userExists = users.some((user) => user.id === userId);
+
+  if (!userExists) {
+    return res.status(404).json({ error: 'Пользователь не найден' });
+  }
+
+  const nextUsers = users.filter((user) => user.id !== userId);
+  writeArray(USERS_PATH, nextUsers);
+
+  const recipes = safeReadArray(RECIPES_PATH).map(normalizeRecipe);
+  const nextRecipes = recipes
+    .filter((recipe) => recipe.authorId !== userId)
+    .map((recipe) => ({
+      ...recipe,
+      likes: recipe.likes.filter((id) => id !== userId),
+      comments: recipe.comments.filter((comment) => comment.userId !== userId)
+    }));
+  writeArray(RECIPES_PATH, nextRecipes);
+
+  const resetCodes = safeReadArray(RESET_CODES_PATH);
+  const nextResetCodes = resetCodes.filter((entry) => entry.userId !== userId);
+  writeArray(RESET_CODES_PATH, nextResetCodes);
+
+  req.session.destroy(() => {
+    res.json({ ok: true });
+  });
+});
+
 app.post('/api/auth/forgot-password', async (req, res) => {
   const { email } = req.body;
   if (!email) {

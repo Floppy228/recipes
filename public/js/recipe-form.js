@@ -1,11 +1,21 @@
 ﻿const form = document.getElementById("recipeForm");
 const ingredientsDiv = document.getElementById("ingredients");
 const stepsDiv = document.getElementById("steps");
-const msg = document.getElementById("msg");
 const category = document.getElementById("category");
+const toast = document.getElementById("toast");
 
 const recipeId = new URLSearchParams(location.search).get("id");
 let existingStepImages = [];
+let toastTimer = null;
+
+function showToast(message, type = "error") {
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.remove("toast-error", "toast-success");
+  toast.classList.add(type === "success" ? "toast-success" : "toast-error", "visible");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("visible"), 2600);
+}
 
 function ingredientRow(value = "") {
   const row = document.createElement("div");
@@ -68,7 +78,7 @@ async function init() {
       stepRow();
     }
   } catch (error) {
-    msg.textContent = error.message;
+    showToast(error.message, "error");
   }
 }
 
@@ -85,10 +95,7 @@ form.addEventListener("submit", async (event) => {
       data.append("coverImage", form.coverImage.files[0]);
     }
 
-    const ingredients = [...ingredientsDiv.querySelectorAll("input")]
-      .map((input) => input.value.trim())
-      .filter(Boolean);
-
+    const ingredients = [...ingredientsDiv.querySelectorAll("input")].map((input) => input.value.trim()).filter(Boolean);
     data.append("ingredients", JSON.stringify(ingredients));
 
     const rows = [...stepsDiv.querySelectorAll(".row")];
@@ -99,9 +106,7 @@ form.addEventListener("submit", async (event) => {
       const text = row.querySelector("textarea").value.trim();
       const file = row.querySelector('input[type="file"]').files[0];
 
-      if (!text) {
-        return;
-      }
+      if (!text) return;
 
       steps.push({ text });
       keepImages.push(existingStepImages[index] || "");
@@ -124,9 +129,12 @@ form.addEventListener("submit", async (event) => {
       throw new Error(payload.error || "Ошибка сохранения рецепта");
     }
 
-    location.href = "/pages/dashboard.html";
+    showToast("Рецепт сохранен", "success");
+    setTimeout(() => {
+      location.href = "/pages/dashboard.html";
+    }, 350);
   } catch (error) {
-    msg.textContent = error.message;
+    showToast(error.message, "error");
   }
 });
 

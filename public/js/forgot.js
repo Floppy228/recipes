@@ -1,5 +1,4 @@
-﻿const msg = document.getElementById("msg");
-const form = document.getElementById("forgotForm");
+﻿const form = document.getElementById("forgotForm");
 const sendCodeBtn = document.getElementById("sendCode");
 const toast = document.getElementById("toast");
 
@@ -17,64 +16,58 @@ function showToast(message, type = "error") {
   toast.classList.remove("toast-error", "toast-success");
   toast.classList.add(type === "success" ? "toast-success" : "toast-error", "visible");
 
-  if (toastTimer) {
-    clearTimeout(toastTimer);
-  }
-
+  clearTimeout(toastTimer);
   toastTimer = setTimeout(() => {
     toast.classList.remove("visible");
   }, 2600);
 }
 
+async function postJson(url, payload, fallbackError, timeoutMs = 0) {
+  const controller = timeoutMs > 0 ? new AbortController() : null;
+  const timer = controller ? setTimeout(() => controller.abort(), timeoutMs) : null;
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      signal: controller ? controller.signal : undefined
+    });
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(data.error || fallbackError);
+    }
+
+    return data;
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
 async function sendResetCode() {
   if (!sendCodeBtn) return;
 
-    msg.textContent = "";
+  const email = emailInput ? emailInput.value.trim() : "";
+  if (!email) {
+    showToast("Введите email", "error");
+    return;
+  }
 
-    const email = emailInput ? emailInput.value.trim() : "";
-    if (!email) {
-      msg.style.color = "#a32626";
-      msg.textContent = "Введите email";
-      showToast("Введите email", "error");
-      return;
-    }
+  sendCodeBtn.disabled = true;
+  const originalBtnText = sendCodeBtn.textContent;
+  sendCodeBtn.textContent = "Отправка...";
 
-    sendCodeBtn.disabled = true;
-    const originalBtnText = sendCodeBtn.textContent;
-    sendCodeBtn.textContent = "Отправка...";
-
-    try {
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-      const response = await fetch("/api/auth/forgot-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-        signal: controller.signal
-      });
-      clearTimeout(timer);
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Ошибка отправки кода");
-      }
-
-      msg.style.color = "green";
-      msg.textContent = data.message || "Код отправлен";
-      showToast(data.message || "Код отправлен", "success");
-    } catch (error) {
-      const timeoutError = error && error.name === "AbortError";
-      const message = timeoutError
-        ? "Таймаут сети при отправке кода. Попробуйте еще раз."
-        : error.message;
-      msg.style.color = "#a32626";
-      msg.textContent = message;
-      showToast(message, "error");
-    } finally {
-      sendCodeBtn.disabled = false;
-      sendCodeBtn.textContent = originalBtnText;
-    }
+  try {
+    const data = await postJson("/api/auth/forgot-password", { email }, "Ошибка отправки кода", REQUEST_TIMEOUT_MS);
+    showToast(data.message || "Код отправлен", "success");
+  } catch (error) {
+    const isTimeout = error && error.name === "AbortError";
+    showToast(isTimeout ? "Таймаут сети при отправке кода. Попробуйте еще раз." : error.message, "error");
+  } finally {
+    sendCodeBtn.disabled = false;
+    sendCodeBtn.textContent = originalBtnText;
+  }
 }
 
 if (sendCodeBtn) {
@@ -93,7 +86,6 @@ if (emailInput && sendCodeBtn) {
 if (form) {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    msg.textContent = "";
 
     const payload = {
       email: emailInput ? emailInput.value.trim() : "",
@@ -102,28 +94,12 @@ if (form) {
     };
 
     try {
-      const response = await fetch("/api/auth/reset-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Ошибка сброса пароля");
-      }
-
-      msg.style.color = "green";
-      msg.textContent = data.message;
+      const data = await postJson("/api/auth/reset-password", payload, "Ошибка сброса пароля");
       showToast(data.message, "success");
-
       setTimeout(() => {
         location.href = "/pages/login.html";
       }, 1200);
     } catch (error) {
-      msg.style.color = "#a32626";
-      msg.textContent = error.message;
       showToast(error.message, "error");
     }
   });

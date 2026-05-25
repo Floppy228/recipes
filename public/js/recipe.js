@@ -1,4 +1,4 @@
-const content = document.getElementById("content");
+﻿const content = document.getElementById("content");
 const msg = document.getElementById("msg");
 const toast = document.getElementById("toast");
 
@@ -14,7 +14,7 @@ async function api(path, options = {}) {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    throw new Error(data.error || "Ошибка запроса");
+    throw new Error(data.error || "РћС€РёР±РєР° Р·Р°РїСЂРѕСЃР°");
   }
 
   return data;
@@ -45,7 +45,7 @@ function renderComments(recipe) {
   const comments = Array.isArray(recipe.comments) ? recipe.comments : [];
 
   if (!comments.length) {
-    return '<p class="empty-note">Пока нет комментариев.</p>';
+    return '<p class="empty-note">РџРѕРєР° РЅРµС‚ РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ.</p>';
   }
 
   return `
@@ -54,7 +54,7 @@ function renderComments(recipe) {
         .map(
           (comment) => `
             <article class="comment-card">
-              <p class="comment-head">${comment.userLogin} • ${formatDate(comment.createdAt)}</p>
+              <p class="comment-head">${comment.userLogin} вЂў ${formatDate(comment.createdAt)}</p>
               <p class="comment-text">${comment.text}</p>
             </article>
           `
@@ -72,21 +72,21 @@ function renderRecipe(recipe, user) {
   const userLiked = Boolean(recipe.userLiked);
   const authNote = user
     ? ""
-    : '<p class="auth-note">Лайкать и комментировать могут только зарегистрированные пользователи.</p>';
+    : '<p class="auth-note">Р›Р°Р№РєР°С‚СЊ Рё РєРѕРјРјРµРЅС‚РёСЂРѕРІР°С‚СЊ РјРѕРіСѓС‚ С‚РѕР»СЊРєРѕ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРЅС‹Рµ РїРѕР»СЊР·РѕРІР°С‚РµР»Рё.</p>';
 
   content.innerHTML = `
     <h2>${recipe.title}</h2>
-    <p>${recipe.category} • Автор: <a href="${authorUrl}">${recipe.authorLogin}</a></p>
+    <p>${recipe.category} вЂў РђРІС‚РѕСЂ: <a href="${authorUrl}">${recipe.authorLogin}</a></p>
 
     <section class="stats-panel">
-      <div class="stat-pill">Просмотры: <strong>${views}</strong></div>
-      <div class="stat-pill">Лайки: <strong id="likesCount">${likesCount}</strong></div>
-      <div class="stat-pill">Комментарии: <strong id="commentsCount">${commentsCount}</strong></div>
+      <div class="stat-pill">РџСЂРѕСЃРјРѕС‚СЂС‹: <strong>${views}</strong></div>
+      <div class="stat-pill">Р›Р°Р№РєРё: <strong id="likesCount">${likesCount}</strong></div>
+      <div class="stat-pill">РљРѕРјРјРµРЅС‚Р°СЂРёРё: <strong id="commentsCount">${commentsCount}</strong></div>
     </section>
 
     <div class="social-actions">
       <button class="btn ${userLiked ? "secondary" : ""}" id="likeBtn">
-        ${userLiked ? "Убрать лайк" : "Лайкнуть"}
+        ${userLiked ? "РЈР±СЂР°С‚СЊ Р»Р°Р№Рє" : "Р›Р°Р№РєРЅСѓС‚СЊ"}
       </button>
     </div>
 
@@ -94,19 +94,19 @@ function renderRecipe(recipe, user) {
     ${recipe.coverImage ? `<img src="${recipe.coverImage}" alt="${recipe.title}" />` : ""}
     <p>${recipe.description || ""}</p>
 
-    <h3>Ингредиенты</h3>
+    <h3>РРЅРіСЂРµРґРёРµРЅС‚С‹</h3>
     <ul>
       ${recipe.ingredients.map((item) => `<li>${item}</li>`).join("")}
     </ul>
 
-    <h3>Шаги</h3>
+    <h3>РЁР°РіРё</h3>
     <ol>
       ${recipe.steps
         .map(
           (step) => `
             <li>
               ${step.text}
-              ${step.image ? `<div class="step-img"><img src="${step.image}" alt="Шаг" /></div>` : ""}
+              ${step.image ? `<div class="step-img"><img src="${step.image}" alt="РЁР°Рі" /></div>` : ""}
             </li>
           `
         )
@@ -114,13 +114,13 @@ function renderRecipe(recipe, user) {
     </ol>
 
     <section class="comments-section">
-      <h3>Комментарии</h3>
+      <h3>РљРѕРјРјРµРЅС‚Р°СЂРёРё</h3>
       ${
         user
           ? `
             <form id="commentForm" class="comment-form">
-              <textarea id="commentText" rows="3" placeholder="Напишите комментарий"></textarea>
-              <button type="submit" class="btn">Отправить комментарий</button>
+              <textarea id="commentText" rows="3" placeholder="РќР°РїРёС€РёС‚Рµ РєРѕРјРјРµРЅС‚Р°СЂРёР№"></textarea>
+              <button type="submit" class="btn">РћС‚РїСЂР°РІРёС‚СЊ РєРѕРјРјРµРЅС‚Р°СЂРёР№</button>
             </form>
           `
           : ""
@@ -136,7 +136,7 @@ async function init() {
   try {
     currentRecipeId = new URLSearchParams(location.search).get("id");
     if (!currentRecipeId) {
-      throw new Error("Не указан рецепт");
+      throw new Error("РќРµ СѓРєР°Р·Р°РЅ СЂРµС†РµРїС‚");
     }
 
     try {
@@ -147,7 +147,7 @@ async function init() {
 
     await loadRecipe();
   } catch (error) {
-    msg.textContent = error.message;
+    showToast(error.message);
   }
 }
 
@@ -164,12 +164,12 @@ async function loadRecipe() {
 
   likeBtn.addEventListener("click", async () => {
     if (!currentUser) {
-      showToast("Войдите в аккаунт, чтобы добавлять рецепты в избранное.");
+      showToast("Р’РѕР№РґРёС‚Рµ РІ Р°РєРєР°СѓРЅС‚, С‡С‚РѕР±С‹ РґРѕР±Р°РІР»СЏС‚СЊ СЂРµС†РµРїС‚С‹ РІ РёР·Р±СЂР°РЅРЅРѕРµ.");
       return;
     }
 
     const result = await api(`/api/recipes/${currentRecipeId}/like`, { method: "POST" });
-    likeBtn.textContent = result.userLiked ? "Убрать лайк" : "Лайкнуть";
+    likeBtn.textContent = result.userLiked ? "РЈР±СЂР°С‚СЊ Р»Р°Р№Рє" : "Р›Р°Р№РєРЅСѓС‚СЊ";
     likeBtn.classList.toggle("secondary", result.userLiked);
     document.getElementById("likesCount").textContent = result.likesCount;
   });
@@ -199,3 +199,5 @@ async function loadRecipe() {
 }
 
 init();
+
+
