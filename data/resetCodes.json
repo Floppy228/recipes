@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "cxKMc4aWLR",
+    "userId": "B5GOteJwXYBN",
+    "email": "sivakvladimir11@gmail.com",
+    "code": "710668",
+    "createdAt": "2026-05-25T02:34:11.438Z",
+    "used": false
+  },
+  {
+    "id": "qXhi_KWJ0k",
+    "userId": "B5GOteJwXYBN",
+    "email": "sivakvladimir11@gmail.com",
+    "code": "240425",
+    "createdAt": "2026-05-25T02:34:25.611Z",
+    "used": false
+  }
+]
